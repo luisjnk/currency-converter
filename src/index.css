@@ -1,0 +1,11 @@
+body {
+  font-style: normal;
+  font-stretch: normal;
+  font-family: "Proxima Nova", sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
