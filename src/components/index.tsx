@@ -1,2 +1,2 @@
-export * from './CurrencyInput';
+export * from './CurrencyConverter';
 export * from './Header';

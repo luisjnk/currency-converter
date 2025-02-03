@@ -1,0 +1,41 @@
+.currency-input-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #f8f9fa;
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    padding: 12px;
+    width: 100%;
+    max-width: 350px;
+  }
+  
+  .currency-input {
+    border: none;
+    background: transparent;
+    font-size: 20px;
+    font-weight: bold;
+    width: 100%;
+    outline: none;
+    text-align: left;
+  }
+  
+  .currency-dropdown {
+    border: none;
+    background: transparent;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    outline: none;
+  }
+  
+  .currency-dropdown:focus,
+  .currency-input:focus {
+    outline: none;
+  }
+  
+  .currency-input::placeholder {
+    color: #adb5bd;
+    font-weight: normal;
+  }
+  

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './App.css';
-import { CurrencyInput } from './components';
+import { CurrencyConverter } from './components/CurrencyConverter';
 
 function App() {
   const [amount, setAmount] = useState(0);
@@ -22,7 +22,7 @@ function App() {
           <p>Receive competitive and transparent pricing with no hidden spreads. See how we compare.</p>
         </header>
         <main>
-          <CurrencyInput amount={amount} selectedCurrency={selectedCurrency} handleAmountChange={handleAmountChange} handleCurrencyChange={handleCurrencyChange} />
+          <CurrencyConverter amount={amount} selectedCurrency={selectedCurrency} handleAmountChange={handleAmountChange} handleCurrencyChange={handleCurrencyChange} />
         </main>
       </div>
     </div>
