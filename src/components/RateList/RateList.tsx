@@ -21,10 +21,10 @@ export function RatesList({ rates }: RatesListProps) {
       <ul className="rates-list">
         {rates.map((rate) => (
           <li key={rate.currency}>
-            <span className="rate">{<b>{rate.rate}</b>}</span>
+            <span className="rate">{rate.rate}</span>
             <div>
               <img src={getCurrencyImagePath(rate.currency)} alt={rate.currency} style={{ width: '20px', marginRight: '8px' }} />
-              <span className="currency">{<b>{rate.currency}</b>}</span>
+              <span className="currency">{rate.currency}</span>
             </div>
           </li>
         ))}

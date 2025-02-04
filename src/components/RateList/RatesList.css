@@ -1,7 +1,10 @@
 .rates-list {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  color: #333;
+
   }
   
   .rates-list ul {
@@ -11,9 +14,15 @@
   
   .rates-list li {
     display: flex;
-    -webkit-box-pack: justify;
+    align-items: center;
     justify-content: space-between;
-    padding: 0px 1.5rem;
+    padding: 15px;
+
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    letter-spacing: -0.0125rem;
+    color: rgb(60, 74, 90);
+    font-weight: 600;
   }
   
   .rates-list li:last-child {
@@ -21,4 +30,33 @@
   }
 
   
- 
+  .currency-container {
+    display: flex;
+    flex-direction: column;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    color: #333;
+}
+
+.currency-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 0;
+}
+
+.currency-value {
+    font-weight: bold;
+    color: #333;
+}
+
+.currency-icon {
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Spacing between the icon and text */
+}
+
+.currency-icon img {
+    width: 20px; /* Adjust based on the actual size */
+    height: 20px;
+}
