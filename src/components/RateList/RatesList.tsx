@@ -33,5 +33,3 @@ export function RatesList({ rates, amount }: RatesListProps) {
     </ul>
   );
 };
-
-export default RatesList;

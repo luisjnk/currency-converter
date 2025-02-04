@@ -7,7 +7,7 @@ interface CurrencyInputProps {
   handleAmountChange: (value: string) => void;
 }
 
-export function CurrencyInput ({ amount, handleAmountChange }: CurrencyInputProps) {
+export function CurrencyInput({ amount, handleAmountChange }: CurrencyInputProps) {
   const [formattedAmount, setFormattedAmount] = useState(formatNumber(amount));
 
   const debouncedHandleAmountChange = useCallback(
@@ -26,20 +26,21 @@ export function CurrencyInput ({ amount, handleAmountChange }: CurrencyInputProp
   }
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
-    if(e.target.value === "" ) return;
+    if (e.target.value === "") return;
     const value = parseFloat(e.target.value.replace(/\./g, ""));
     setFormattedAmount(formatNumber(value));
     debouncedHandleAmountChange(value);
   }
-  
+
   return (
-      <input
-        type="text"
-        value={formattedAmount}
-        onChange={handleChange}
-        className="currency-input"
-        placeholder="0.00"
-      />
+    <input
+      data-testid="currency-input"
+      type="text"
+      value={formattedAmount}
+      onChange={handleChange}
+      className="currency-input"
+      placeholder="0.00"
+    />
   );
 };
 
