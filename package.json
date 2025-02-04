@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@uphold/uphold-sdk-javascript": "^2.4.0",
     "cra-template-typescript": "1.2.0",
     "eslint-config-react-app": "^7.0.1",
     "react": "^19.0.0",
