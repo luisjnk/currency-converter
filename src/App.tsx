@@ -7,6 +7,7 @@ function App() {
   const [selectedCurrency, setSelectedCurrency] = useState('USD');
 
   const handleAmountChange = (value: string) => {
+    console.log("AQUIII ", value);
     setAmount(parseFloat(value));
   };
 
@@ -21,7 +22,7 @@ function App() {
           <h1>Currency Converter</h1>
           <p>Receive competitive and transparent pricing with no hidden spreads. See how we compare.</p>
         </header>
-        <main>
+        <main className='home-main-container'>
           <CurrencyConverter amount={amount} selectedCurrency={selectedCurrency} handleAmountChange={handleAmountChange} handleCurrencyChange={handleCurrencyChange} />
         </main>
       </div>

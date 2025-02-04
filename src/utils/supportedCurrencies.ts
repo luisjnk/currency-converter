@@ -3,18 +3,18 @@ import { SupportedCurrency } from './commomTypes'
 export const supportedCurrencies: SupportedCurrency[] = [
   {
     name: 'USD',
-    path: "assets/USD.png",
+    path: process.env.PUBLIC_URL + '/assets/USD.png'
   },
   {
     name: 'EUR',
-    path: "assets/EUR.png",
+    path: process.env.PUBLIC_URL + '/assets/EUR.png'
   },
   {
     name: 'GBP',
-    path: "assets/GBP.png",
+    path: process.env.PUBLIC_URL + '/assets/GBP.png'
   },
   {
     name: 'BRL',
-    path: "assets/BRL.png",
+    path: process.env.PUBLIC_URL + '/assets/BRL.png'
   }
 ]

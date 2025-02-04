@@ -1,0 +1,33 @@
+.currency-select {
+  position: relative;
+}
+
+.selected-currency {
+  padding: 8px;
+  border-radius: 1.5rem;
+  background-color: #fff;
+}
+
+.currency-options {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  z-index: 1000;
+}
+
+.currency-dropdown {
+  border: none;
+  background: transparent;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  outline: none;
+}
+
+.currency-dropdown:focus,
+.currency-input:focus {
+  outline: none;
+}
