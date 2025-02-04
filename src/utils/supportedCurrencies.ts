@@ -1,20 +1,25 @@
-import { SupportedCurrency } from './commomTypes'
+export interface Currency {
+  name: string;
+  path: string;
+}
 
-export const supportedCurrencies: SupportedCurrency[] = [
+const publicUrl = process.env.PUBLIC_URL || '';
+
+export const supportedCurrencies: Currency[] = [
   {
     name: 'USD',
-    path: process.env.PUBLIC_URL + '/assets/USD.png'
+    path: `${publicUrl}/assets/USD.png`
   },
   {
     name: 'EUR',
-    path: process.env.PUBLIC_URL + '/assets/EUR.png'
+    path: `${publicUrl}/assets/EUR.png`
   },
   {
     name: 'GBP',
-    path: process.env.PUBLIC_URL + '/assets/GBP.png'
+    path: `${publicUrl}/assets/GBP.png`
   },
   {
     name: 'BRL',
-    path: process.env.PUBLIC_URL + '/assets/BRL.png'
+    path: `${publicUrl}/assets/BRL.png`
   }
-]
+];

@@ -1,8 +1,8 @@
 import React from "react";
-import { SupportedCurrency } from "../../utils/commomTypes";
+import { Currency } from "../../utils/supportedCurrencies";
 
 interface CurrencyOptionProps {
-  currency: SupportedCurrency;
+  currency: Currency;
   handleCurrencyChange: (value: string) => void;
 }
 

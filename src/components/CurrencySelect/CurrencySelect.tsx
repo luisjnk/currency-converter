@@ -1,7 +1,12 @@
 import React, { useState } from "react";
-import { SupportedCurrency } from "../../utils/commomTypes";
+
 import "./CurrencySelect.css";
 import { CurrencyOption } from "../CurrencyOption/CurrencyOption";
+
+interface SupportedCurrency {
+  name: string;
+  path: string;
+}
 
 interface CurrencySelectProps {
   supportedCurrencies: SupportedCurrency[];

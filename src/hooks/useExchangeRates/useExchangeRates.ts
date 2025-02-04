@@ -12,7 +12,8 @@ interface ExchangeRate {
   rate: string;
   currency: string;
 }
-interface Currency {
+
+interface CurrencyRate {
   ask: string;
   bid: string;
   currency: string;
@@ -23,13 +24,13 @@ function getCurrencyCode(pair: string, base: string): string {
   return pair.replace(base, '').replace('-', '');
 }
 
-function filterSupportedPairs(currencyRates: Currency[], baseCurrency: string): Currency[] {
+function filterSupportedPairs(currencyRates: CurrencyRate[], baseCurrency: string): CurrencyRate[] {
   return currencyRates.filter(({ pair }) =>
     supportedCurrencies
       .some(currency => currency.name === getCurrencyCode(pair, baseCurrency) ))
 }
 
-function removeDuplicatePairs(supportedPairs: Currency[], baseCurrency: string): Currency[] {
+function removeDuplicatePairs(supportedPairs: CurrencyRate[], baseCurrency: string): CurrencyRate[] {
   const selectedPairs: { [key: string]: boolean } = {};
   return supportedPairs.filter(({ pair }) => {
     const key = getCurrencyCode(pair, baseCurrency);
@@ -39,7 +40,7 @@ function removeDuplicatePairs(supportedPairs: Currency[], baseCurrency: string):
   });
 }
 
-function convertPairsToRates(uniquePairs: Currency[], baseCurrency: string): ExchangeRate[] {
+function convertPairsToRates(uniquePairs: CurrencyRate[], baseCurrency: string): ExchangeRate[] {
   return uniquePairs.map(({ ask, currency, pair }): ExchangeRate => {
     const rate = currency === baseCurrency
       ? (1 / Number.parseFloat(ask)).toString()
@@ -51,7 +52,7 @@ function convertPairsToRates(uniquePairs: Currency[], baseCurrency: string): Exc
   });
 }
 
-function geRatesByBaseCurrency(currencyRates: Currency[], baseCurrency: string): ExchangeRate[] {
+function geRatesByBaseCurrency(currencyRates: CurrencyRate[], baseCurrency: string): ExchangeRate[] {
   const supportedPairs = filterSupportedPairs(currencyRates, baseCurrency);
   const uniquePairs = removeDuplicatePairs(supportedPairs, baseCurrency);
   return convertPairsToRates(uniquePairs, baseCurrency);
