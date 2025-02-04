@@ -1,21 +1,16 @@
 .currency-select {
-  position: relative;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 1.5rem;
 }
 
 .selected-currency {
   padding: 8px;
   border-radius: 1.5rem;
   background-color: #fff;
-}
-
-.currency-options {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-  border: 1px solid #ccc;
-  background-color: #fff;
-  z-index: 1000;
+  padding-left: 0.75rem;
+  padding-right: 1.25rem;
 }
 
 .currency-dropdown {
@@ -30,4 +25,14 @@
 .currency-dropdown:focus,
 .currency-input:focus {
   outline: none;
+}
+
+.currency-input {
+  font-size: 3rem;
+  color: rgb(60, 74, 90);
+  background-color: rgb(245, 249, 252);
+  border: 0px;
+  border-radius: 0.5rem;
+  width: 100%;
+  padding: 0.75rem 0.2rem 0.75rem 1.5rem;
 }

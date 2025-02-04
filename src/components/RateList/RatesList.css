@@ -1,62 +1,82 @@
 .rates-list {
   display: flex;
   flex-direction: column;
+  gap: 1.5rem;
+  width: 35%;
+}
+  
+.rates-list ul {
+  list-style-type: none;
+  padding: 0;
+}
+  
+ .currency-container {
+  display: flex;
+  flex-direction: column;
   font-family: Arial, sans-serif;
   font-size: 16px;
   color: #333;
-
-  }
-  
-  .rates-list ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .rates-list li {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 15px;
-
-    font-size: 1.25rem;
-    line-height: 1.75rem;
-    letter-spacing: -0.0125rem;
-    color: rgb(60, 74, 90);
-    font-weight: 600;
-  }
-  
-  .rates-list li:last-child {
-    border-bottom: none;
-  }
-
-  
-  .currency-container {
-    display: flex;
-    flex-direction: column;
-    font-family: Arial, sans-serif;
-    font-size: 16px;
-    color: #333;
 }
 
 .currency-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 5px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 0;
 }
 
 .currency-value {
-    font-weight: bold;
-    color: #333;
+  font-weight: bold;
+  color: #333;
 }
 
 .currency-icon {
-    display: flex;
-    align-items: center;
-    gap: 5px; /* Spacing between the icon and text */
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
 
 .currency-icon img {
-    width: 20px; /* Adjust based on the actual size */
-    height: 20px;
+  width: 20px;
+  height: 20px;
 }
+
+.rate-item-content{
+  display: flex;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0px 1.5rem;
+}
+
+.rate-item-content-span{
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  letter-spacing: -0.0125rem;
+  color: rgb(60, 74, 90);
+  font-weight: 600;
+}
+
+.rate-item-currency {
+  font-size: 1.3rem;
+  line-height: 1.5rem;
+  letter-spacing: -0.0125rem;
+  color: rgb(60, 74, 90);
+  font-weight: 600;
+}
+
+.rate-item-content div{
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  gap: 0.5rem;
+  padding-left: 0.75rem;
+  padding-right: 1.25rem;
+  min-width: 7rem;
+}
+
+.rate-item-content div img{
+  max-width: 1.5rem;
+}
+
+

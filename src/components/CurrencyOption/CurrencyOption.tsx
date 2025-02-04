@@ -1,5 +1,6 @@
 import React from "react";
 import { Currency } from "../../utils/supportedCurrencies";
+import "./CurrencyOption.css";
 
 interface CurrencyOptionProps {
   currency: Currency;
@@ -10,13 +11,14 @@ export function CurrencyOption({ currency, handleCurrencyChange }: CurrencyOptio
   console.log("currencypaty", currency.path)
   return (
     <div
-      className="currency-option"
+      className="currency-c"
       onClick={() => handleCurrencyChange(currency.name)}
       style={{ display: 'flex', alignItems: 'center', padding: '8px', cursor: 'pointer' }}
     >
-      <img src={currency.path} alt={currency.name} style={{ width: '20px', marginRight: '8px' }} />
-      <b>{currency.name}</b>
-
+      <div className="currency-option space">
+        <img src={currency.path} alt={currency.name} style={{ width: '24px', marginRight: '8px' }} />
+        {currency.name}
+      </div>
     </div>
   );
 }

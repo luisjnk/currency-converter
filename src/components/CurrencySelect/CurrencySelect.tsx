@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import "./CurrencySelect.css";
 import { CurrencyOption } from "../CurrencyOption/CurrencyOption";
 
+
+
 interface SupportedCurrency {
   name: string;
   path: string;
@@ -28,8 +30,9 @@ export function CurrencySelect({ supportedCurrencies, selectedCurrency, handleCu
       >
         {selectedCurrencyData && (
           <>
-            <img src={selectedCurrencyData.path} alt={selectedCurrencyData.name} style={{ width: '20px', marginRight: '8px' }} />
-            <b>{selectedCurrencyData.name}</b>
+            <img src={selectedCurrencyData.path} alt={selectedCurrencyData.name} style={{ width: '24px', marginRight: '8px' }} />
+            {selectedCurrencyData.name}
+            <img src="/dropdown-icon.svg" alt="Dropdown Icon" style={{ width: '8px', marginLeft: '8px' }} />
           </>
         )}
       </div>

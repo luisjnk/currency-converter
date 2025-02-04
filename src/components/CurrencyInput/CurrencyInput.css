@@ -1,10 +1,6 @@
 .currency-input-container {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  background: #f8f9fa;
-  padding: 12px;
-  width: 100%;
+  position: relative;
+  margin-bottom: 2rem;
 }
 
 .currency-input {
@@ -14,7 +10,7 @@
   border: 0px;
   border-radius: 0.5rem;
   width: 100%;
-  padding: 0.75rem 1rem 0.75rem 1.5rem;
+  padding: 0.75rem 0.2rem 0.75rem 1.5rem;
 }
 
 .currency-input::placeholder {
