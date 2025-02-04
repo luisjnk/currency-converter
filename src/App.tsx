@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import './App.css';
 import { CurrencyConverter } from './components/CurrencyConverter';
+import { useExchangeRates } from './hooks';
 
 function App() {
   const [amount, setAmount] = useState(0);
   const [selectedCurrency, setSelectedCurrency] = useState('USD');
 
+  const ratesMap = useExchangeRates(selectedCurrency, amount);
+  
   const handleAmountChange = (value: string) => {
-    console.log("AQUIII ", value);
     setAmount(parseFloat(value));
   };
 
