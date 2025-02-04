@@ -10,8 +10,6 @@ function App() {
 
   const { rates, isLoading, isError } = useExchangeRates(selectedCurrency, amount);
 
-  console.log(`Rates: ${rates}`, `isLoading: ${isLoading}`, `isError: ${isError}`);
-
   const handleAmountChange = (value: string) => {
     setAmount(parseFloat(value));
   };
