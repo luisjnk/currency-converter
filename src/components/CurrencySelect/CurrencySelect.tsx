@@ -29,7 +29,7 @@ export function CurrencySelect({ supportedCurrencies, selectedCurrency, handleCu
         {selectedCurrencyData && (
           <>
             <img src={selectedCurrencyData.path} alt={selectedCurrencyData.name} style={{ width: '20px', marginRight: '8px' }} />
-            {selectedCurrencyData.name}
+            <b>{selectedCurrencyData.name}</b>
           </>
         )}
       </div>

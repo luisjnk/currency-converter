@@ -1,0 +1,24 @@
+.rates-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .rates-list ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .rates-list li {
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    padding: 0px 1.5rem;
+  }
+  
+  .rates-list li:last-child {
+    border-bottom: none;
+  }
+
+  
+ 

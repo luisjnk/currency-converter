@@ -2,13 +2,16 @@ import React, { useState } from 'react';
 import './App.css';
 import { CurrencyConverter } from './components/CurrencyConverter';
 import { useExchangeRates } from './hooks';
+import { Loading, RatesList } from './components';
 
 function App() {
   const [amount, setAmount] = useState(0);
   const [selectedCurrency, setSelectedCurrency] = useState('USD');
 
-  const ratesMap = useExchangeRates(selectedCurrency, amount);
-  
+  const { rates, isLoading, isError } = useExchangeRates(selectedCurrency, amount);
+
+  console.log(`Rates: ${rates}`, `isLoading: ${isLoading}`, `isError: ${isError}`);
+
   const handleAmountChange = (value: string) => {
     setAmount(parseFloat(value));
   };
@@ -26,6 +29,8 @@ function App() {
         </header>
         <main className='home-main-container'>
           <CurrencyConverter amount={amount} selectedCurrency={selectedCurrency} handleAmountChange={handleAmountChange} handleCurrencyChange={handleCurrencyChange} />
+          <RatesList rates={rates} />
+          {isLoading && <Loading />}
         </main>
       </div>
     </div>

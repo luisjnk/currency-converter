@@ -2,12 +2,6 @@ import SDK from '@uphold/uphold-sdk-javascript';
 import { useEffect, useState } from 'react';
 import { supportedCurrencies } from '../../utils/supportedCurrencies';
 
-const sdk = new SDK({
-  baseUrl: 'http://api-sandbox.uphold.com',
-  clientId: 'foo',
-  clientSecret: 'bar',
-});
-
 interface ExchangeRate {
   rate: string;
   currency: string;
@@ -19,6 +13,18 @@ interface CurrencyRate {
   currency: string;
   pair: string;
 }
+
+interface UseExchangeRatesResult {
+  rates: ExchangeRate[] | null;
+  isError: boolean;
+  isLoading: boolean;
+}
+
+const sdk = new SDK({
+  baseUrl: 'http://api-sandbox.uphold.com',
+  clientId: 'foo',
+  clientSecret: 'bar',
+});
 
 function getCurrencyCode(pair: string, base: string): string {
   return pair.replace(base, '').replace('-', '');
@@ -58,21 +64,25 @@ function geRatesByBaseCurrency(currencyRates: CurrencyRate[], baseCurrency: stri
   return convertPairsToRates(uniquePairs, baseCurrency);
 }
 
-export function useExchangeRates(baseCurrency: string, amount: number): ExchangeRate[] {  
-  const [rates, setRates] = useState<ExchangeRate[]>(null);
+export function useExchangeRates(baseCurrency: string, amount: number): UseExchangeRatesResult {  
+  const [rates, setRates] = useState<ExchangeRate[]>([]);
+  const [isError, setIsError] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const updateRates = async () =>{
       try {
+        setIsLoading(true)
         const currencyRates = await sdk.getTicker(baseCurrency);
         setRates(geRatesByBaseCurrency(currencyRates, baseCurrency))
+        setIsLoading(false)
       } catch (err) {
-        console.log(err);
+        setIsError(true);
       }
     }
 
     if(amount > 0) updateRates();
-  }, [baseCurrency, setRates, amount]);
+  }, [baseCurrency, setRates, amount, setIsError, setIsLoading]);
 
-  return rates;
+  return {rates, isError, isLoading};
 }

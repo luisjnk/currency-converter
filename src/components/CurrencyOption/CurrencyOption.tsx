@@ -15,7 +15,8 @@ export function CurrencyOption({ currency, handleCurrencyChange }: CurrencyOptio
       style={{ display: 'flex', alignItems: 'center', padding: '8px', cursor: 'pointer' }}
     >
       <img src={currency.path} alt={currency.name} style={{ width: '20px', marginRight: '8px' }} />
-      {currency.name}
+      <b>{currency.name}</b>
+
     </div>
   );
 }

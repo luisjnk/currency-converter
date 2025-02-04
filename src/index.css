@@ -1,7 +1,10 @@
 body {
+  font-family: "Roboto", serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
   font-style: normal;
-  font-stretch: normal;
-  font-family: "Proxima Nova", sans-serif;
+  font-variation-settings:
+    "wdth" 100;
   -webkit-font-smoothing: antialiased;
 }
 
