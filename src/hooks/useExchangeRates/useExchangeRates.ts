@@ -58,11 +58,12 @@ function convertPairsToRates(uniquePairs: CurrencyRate[], baseCurrency: string):
   });
 }
 
-function geRatesByBaseCurrency(currencyRates: CurrencyRate[], baseCurrency: string): ExchangeRate[] {
+function getRatesByBaseCurrency(currencyRates: CurrencyRate[], baseCurrency: string): ExchangeRate[] {
   const supportedPairs = filterSupportedPairs(currencyRates, baseCurrency);
   const uniquePairs = removeDuplicatePairs(supportedPairs, baseCurrency);
   return convertPairsToRates(uniquePairs, baseCurrency);
 }
+
 
 export function useExchangeRates(baseCurrency: string, amount: number): UseExchangeRatesResult {  
   const [rates, setRates] = useState<ExchangeRate[]>([]);
@@ -70,18 +71,27 @@ export function useExchangeRates(baseCurrency: string, amount: number): UseExcha
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    const updateRates = async () =>{
-      try {
-        setIsLoading(true)
-        const currencyRates = await sdk.getTicker(baseCurrency);
-        setRates(geRatesByBaseCurrency(currencyRates, baseCurrency))
-        setIsLoading(false)
-      } catch (err) {
-        setIsError(true);
-      }
+    const cachedRates = localStorage.getItem(`exchangeRates_${baseCurrency}`);
+    if (cachedRates) {
+      setRates(JSON.parse(cachedRates));
+      return;
     }
 
-    if(amount > 0) updateRates();
+    const updateRates = async () => {
+      try {
+        setIsLoading(true);
+        const currencyRates = await sdk.getTicker(baseCurrency);
+        const rates = getRatesByBaseCurrency(currencyRates, baseCurrency);
+        setRates(rates);
+        localStorage.setItem(`exchangeRates_${baseCurrency}`, JSON.stringify(rates));
+        setIsLoading(false);
+      } catch (err) {
+        setIsError(true);
+        setIsLoading(false);
+      }
+    };
+
+    updateRates();
   }, [baseCurrency, setRates, amount, setIsError, setIsLoading]);
 
   return {rates, isError, isLoading};
