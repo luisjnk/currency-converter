@@ -78,6 +78,9 @@
   line-height: 1.5rem;
   letter-spacing: -0.0125rem;
   color: rgb(60, 74, 90);
+}
+
+.font-weight-bold {
   font-weight: 600;
 }
 

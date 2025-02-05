@@ -29,7 +29,7 @@ export function CurrencyInput({ amount, handleAmountChange }: CurrencyInputProps
       onChange={(e) => handleInputChange(e.target.value)}
       className="currency-input"
       maxLength={12}
-      placeholder="0.00"
+      placeholder="0,00"
     />
   );
 };

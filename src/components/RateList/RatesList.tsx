@@ -28,7 +28,7 @@ export function RatesList({ rates, amount }: RatesListProps) {
       <ul>
         {rates.slice(0, visibleCount).map((rate) => (
           <li className='rate-item-content' key={rate.currency}>
-            <span className="rate-item-currency">
+            <span className="rate-item-currency font-weight-bold">
               {(amount * parseFloat(rate.rate)).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
             </span>
             <div>
