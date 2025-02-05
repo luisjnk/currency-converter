@@ -2,11 +2,6 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { RatesList } from './RatesList';
 
-const mockSupportedCurrencies = [
-  { name: 'USD', path: '/path/to/usd-icon.svg' },
-  { name: 'EUR', path: '/path/to/eur-icon.svg' },
-];
-
 jest.mock('../../utils/supportedCurrencies', () => ({
   supportedCurrencies: [
     { name: 'USD', path: '/path/to/usd-icon.svg' },
