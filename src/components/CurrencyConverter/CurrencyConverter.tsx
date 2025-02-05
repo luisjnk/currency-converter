@@ -11,6 +11,7 @@ interface CurrencyConverterProps {
   handleCurrencyChange: (value: string) => void;
 }
 
+// CurrencyConverter component to handle currency conversion
 export function CurrencyConverter({
   amount,
   handleAmountChange,

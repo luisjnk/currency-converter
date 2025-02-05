@@ -28,6 +28,7 @@ export function CurrencySelect({
     (currency) => currency.name !== selectedCurrency
   );
 
+  // Handle clicks outside the component to close the dropdown
   const handleClickOutside = (event: MouseEvent) => {
     if (ref.current && !ref.current.contains(event.target as Node)) {
       setIsOpen(false);
@@ -41,6 +42,7 @@ export function CurrencySelect({
     };
   }, []);
 
+  // Handle option click and close the dropdown
   const handleOptionClick = (value: string) => {
     handleCurrencyChange(value);
     setIsOpen(false);

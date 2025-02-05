@@ -17,10 +17,13 @@ export function CurrencyInput({
 }: CurrencyInputProps) {
   const [inputValue, setInputValue] = useState('');
 
+  // Debounced function to handle input change
   const debouncedOnInputChange = useCallback(
     debounce(handleAmountChange, 300),
-    []
+    [handleAmountChange]
   );
+
+  // Handle input change and format the value
   const handleInputChange = (entry: string) => {
     try {
       setInputValue(formatToLocaleString(entry));
@@ -37,7 +40,7 @@ export function CurrencyInput({
       onChange={(e) => handleInputChange(e.target.value)}
       className="currency-input"
       maxLength={12}
-      placeholder="0,00"
+      placeholder="0.00"
     />
   );
 }

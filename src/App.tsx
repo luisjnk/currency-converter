@@ -8,15 +8,18 @@ function App() {
   const [amount, setAmount] = useState(0);
   const [selectedCurrency, setSelectedCurrency] = useState('USD');
 
+  // Fetch exchange rates using the custom hook
   const { rates, isLoading, isError, errorMessage } = useExchangeRates(
     selectedCurrency,
     amount
   );
 
+  // Handle amount change
   const handleAmountChange = (value: string) => {
     setAmount(parseFloat(value));
   };
 
+  // Handle currency change
   const handleCurrencyChange = (value: string) => {
     setSelectedCurrency(value);
   };
@@ -38,9 +41,7 @@ function App() {
           />
           {isLoading && <Loading />}
           {isError && errorMessage && <Error message={errorMessage} />}
-          {amount > 0 && !isError && !isLoading && (
-            <RatesList rates={rates} amount={amount} />
-          )}
+          {amount > 0 && <RatesList rates={rates} amount={amount} />}
         </div>
       </div>
     </div>
