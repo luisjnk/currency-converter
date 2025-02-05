@@ -1,10 +1,10 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import './CurrencyInput.css';
 import {
-  debounce,
   formatToLocaleString,
   formatToNumber,
 } from '../../utils/helpers';
+import { useDebounce } from '../../hooks/useDebounce';
 
 interface CurrencyInputProps {
   amount: number;
@@ -18,16 +18,13 @@ export function CurrencyInput({
   const [inputValue, setInputValue] = useState('');
 
   // Debounced function to handle input change
-  const debouncedOnInputChange = useCallback(
-    debounce(handleAmountChange, 300),
-    [handleAmountChange]
-  );
+  const debounce = useDebounce(handleAmountChange, 400);
 
   // Handle input change and format the value
   const handleInputChange = (entry: string) => {
     try {
       setInputValue(formatToLocaleString(entry));
-      debouncedOnInputChange(formatToNumber(entry));
+      debounce(formatToNumber(entry).toString());
     } catch (error) {
       console.warn(error);
     }

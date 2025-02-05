@@ -14,6 +14,7 @@ function App() {
     amount
   );
 
+  console.log("rates", rates);
   // Handle amount change
   const handleAmountChange = (value: string) => {
     setAmount(parseFloat(value));

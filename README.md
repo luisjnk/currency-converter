@@ -40,3 +40,12 @@ This project is a Currency Converter application built with React and TypeScript
 | npm run prettier      | Formats the code using Prettier    |
 | npm run prettier      | Formats the npm run prettier:checkr    | Checks the code formatting using Prettie
 
+## Acceptance criteria
+
+- [X] **TC01:** The user input amount should be USD by default.
+- [X] **TC02:** Should be able to change between currencies.
+- [X] **TC03:** Should update the values for every currency on user interaction using a
+debounce mechanism.
+- [X] **TC04:** Should have all the values cached upon the first request.
+- [X] **TC05:** Should make a new API call in the background, re-populating the cached value,
+when changing between currencies.
