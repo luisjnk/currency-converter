@@ -115,7 +115,6 @@ export function useExchangeRates(baseCurrency: string, amount: number): UseExcha
         setCachedRates(baseCurrency, rates);
         setIsLoading(false);
       } catch (err) {
-        console.log(err);
         setIsError(true);
         setErrorMessage('An error occurred while fetching exchange rates.');
         setIsLoading(false);

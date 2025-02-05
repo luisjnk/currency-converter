@@ -8,7 +8,6 @@ interface CurrencyOptionProps {
 }
 
 export function CurrencyOption({ currency, handleCurrencyChange }: CurrencyOptionProps) {
-  console.log("currencypaty", currency.path)
   return (
     <div
       className="currency-c"
