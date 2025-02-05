@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useState } from 'react';
 import './CurrencyInput.css';
 import {
   formatToLocaleString,
