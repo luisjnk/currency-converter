@@ -11,4 +11,4 @@ export function Error({ message }: ErrorProps) {
       <p className="error-message light-pink-text">{message}</p>
     </div>
   );
-};
+}

@@ -8,78 +8,78 @@ const publicUrl = process.env.PUBLIC_URL || '';
 export const supportedCurrencies: Currency[] = [
   {
     name: 'USD',
-    path: `${publicUrl}/assets/USD.png`
+    path: `${publicUrl}/assets/USD.png`,
   },
   {
     name: 'EUR',
-    path: `${publicUrl}/assets/EUR.png`
+    path: `${publicUrl}/assets/EUR.png`,
   },
   {
     name: 'GBP',
-    path: `${publicUrl}/assets/GBP.png`
+    path: `${publicUrl}/assets/GBP.png`,
   },
   {
     name: 'AUD',
-    path: `${publicUrl}/assets/AUD.png`
+    path: `${publicUrl}/assets/AUD.png`,
   },
   {
     name: 'BRL',
-    path: `${publicUrl}/assets/BRL.png`
+    path: `${publicUrl}/assets/BRL.png`,
   },
   {
     name: 'BCH',
-    path: `${publicUrl}/assets/BCH.png`
+    path: `${publicUrl}/assets/BCH.png`,
   },
   {
     name: 'BTG',
-    path: `${publicUrl}/assets/BTG.png`
+    path: `${publicUrl}/assets/BTG.png`,
   },
   {
     name: 'NZD',
-    path: `${publicUrl}/assets/NZD.png`
+    path: `${publicUrl}/assets/NZD.png`,
   },
   {
     name: 'CHF',
-    path: `${publicUrl}/assets/CHF.png`
+    path: `${publicUrl}/assets/CHF.png`,
   },
   {
     name: 'NOK',
-    path: `${publicUrl}/assets/NOK.png`
+    path: `${publicUrl}/assets/NOK.png`,
   },
   {
     name: 'MXN',
-    path: `${publicUrl}/assets/MXN.png`
+    path: `${publicUrl}/assets/MXN.png`,
   },
   {
     name: 'JPY',
-    path: `${publicUrl}/assets/JPY.png`
+    path: `${publicUrl}/assets/JPY.png`,
   },
   {
     name: 'ETH',
-    path: `${publicUrl}/assets/ETH.png`
+    path: `${publicUrl}/assets/ETH.png`,
   },
   {
     name: 'HKD',
-    path: `${publicUrl}/assets/HKD.png`
+    path: `${publicUrl}/assets/HKD.png`,
   },
   {
     name: 'DKK',
-    path: `${publicUrl}/assets/DKK.png`
+    path: `${publicUrl}/assets/DKK.png`,
   },
   {
     name: 'CNY',
-    path: `${publicUrl}/assets/CNY.png`
+    path: `${publicUrl}/assets/CNY.png`,
   },
   {
     name: 'CAD',
-    path: `${publicUrl}/assets/CAD.png`
+    path: `${publicUrl}/assets/CAD.png`,
   },
   {
     name: 'ILS',
-    path: `${publicUrl}/assets/ILS.png`
+    path: `${publicUrl}/assets/ILS.png`,
   },
   {
     name: 'KES',
-    path: `${publicUrl}/assets/KES.png`
-  }
+    path: `${publicUrl}/assets/KES.png`,
+  },
 ];

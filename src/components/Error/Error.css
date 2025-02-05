@@ -1,10 +1,10 @@
 .error-container {
-    padding: 1rem;
-    border-radius: 0.25rem;
-    margin: 1rem 0;
-  }
-  
-  .error-message {
-    margin: 0;
-    font-size: 1rem;
-  }
+  padding: 1rem;
+  border-radius: 0.25rem;
+  margin: 1rem 0;
+}
+
+.error-message {
+  margin: 0;
+  font-size: 1rem;
+}

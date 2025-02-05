@@ -31,13 +31,21 @@ function getCurrencyCode(pair: string, base: string): string {
   return pair.replace(base, '').replace('-', '');
 }
 
-function filterSupportedPairs(currencyRates: CurrencyRate[], baseCurrency: string): CurrencyRate[] {
+function filterSupportedPairs(
+  currencyRates: CurrencyRate[],
+  baseCurrency: string
+): CurrencyRate[] {
   return currencyRates.filter(({ pair }) =>
-    supportedCurrencies.some(currency => currency.name === getCurrencyCode(pair, baseCurrency))
+    supportedCurrencies.some(
+      (currency) => currency.name === getCurrencyCode(pair, baseCurrency)
+    )
   );
 }
 
-function removeDuplicatePairs(supportedPairs: CurrencyRate[], baseCurrency: string): CurrencyRate[] {
+function removeDuplicatePairs(
+  supportedPairs: CurrencyRate[],
+  baseCurrency: string
+): CurrencyRate[] {
   const selectedPairs: { [key: string]: boolean } = {};
   return supportedPairs.filter(({ pair }) => {
     const key = getCurrencyCode(pair, baseCurrency);
@@ -47,11 +55,13 @@ function removeDuplicatePairs(supportedPairs: CurrencyRate[], baseCurrency: stri
   });
 }
 
-function convertPairsToRates(uniquePairs: CurrencyRate[], baseCurrency: string): ExchangeRate[] {
+function convertPairsToRates(
+  uniquePairs: CurrencyRate[],
+  baseCurrency: string
+): ExchangeRate[] {
   return uniquePairs.map(({ ask, currency, pair }): ExchangeRate => {
-    const rate = currency === baseCurrency
-      ? (1 / Number.parseFloat(ask)).toString()
-      : ask;
+    const rate =
+      currency === baseCurrency ? (1 / Number.parseFloat(ask)).toString() : ask;
     return {
       rate,
       currency: getCurrencyCode(pair, baseCurrency),
@@ -59,7 +69,10 @@ function convertPairsToRates(uniquePairs: CurrencyRate[], baseCurrency: string):
   });
 }
 
-function getRatesByBaseCurrency(currencyRates: CurrencyRate[], baseCurrency: string): ExchangeRate[] {
+function getRatesByBaseCurrency(
+  currencyRates: CurrencyRate[],
+  baseCurrency: string
+): ExchangeRate[] {
   const supportedPairs = filterSupportedPairs(currencyRates, baseCurrency);
   const uniquePairs = removeDuplicatePairs(supportedPairs, baseCurrency);
   return convertPairsToRates(uniquePairs, baseCurrency);
@@ -69,7 +82,9 @@ function getCacheKey(baseCurrency: string): string {
   return `exchangeRates_${baseCurrency}`;
 }
 
-function getCachedRates(baseCurrency: string): { rates: ExchangeRate[], timestamp: number } | null {
+function getCachedRates(
+  baseCurrency: string
+): { rates: ExchangeRate[]; timestamp: number } | null {
   const cacheKey = getCacheKey(baseCurrency);
   const cachedData = localStorage.getItem(cacheKey);
   if (cachedData) {
@@ -90,7 +105,10 @@ function isCacheExpired(timestamp: number): boolean {
   return currentTime - timestamp >= oneHour;
 }
 
-export function useExchangeRates(baseCurrency: string, amount: number): UseExchangeRatesResult {
+export function useExchangeRates(
+  baseCurrency: string,
+  amount: number
+): UseExchangeRatesResult {
   const [rates, setRates] = useState<ExchangeRate[]>([]);
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);

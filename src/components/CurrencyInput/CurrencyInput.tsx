@@ -1,26 +1,34 @@
-import React, { useCallback, useState } from "react";
-import "./CurrencyInput.css";
-import { debounce, formatToLocaleString, formatToNumber } from "../../utils/helpers";
+import React, { useCallback, useState } from 'react';
+import './CurrencyInput.css';
+import {
+  debounce,
+  formatToLocaleString,
+  formatToNumber,
+} from '../../utils/helpers';
 
 interface CurrencyInputProps {
   amount: number;
   handleAmountChange: (value: string) => void;
 }
 
-export function CurrencyInput({ amount, handleAmountChange }: CurrencyInputProps) {
+export function CurrencyInput({
+  amount,
+  handleAmountChange,
+}: CurrencyInputProps) {
+  const [inputValue, setInputValue] = useState('');
 
-  const [inputValue, setInputValue] = useState('')
-
-
-  const debouncedOnInputChange = useCallback(debounce(handleAmountChange, 300), [])
+  const debouncedOnInputChange = useCallback(
+    debounce(handleAmountChange, 300),
+    []
+  );
   const handleInputChange = (entry: string) => {
     try {
-      setInputValue(formatToLocaleString(entry))
-      debouncedOnInputChange(formatToNumber(entry))
+      setInputValue(formatToLocaleString(entry));
+      debouncedOnInputChange(formatToNumber(entry));
     } catch (error) {
-      console.warn(error)
+      console.warn(error);
     }
-  }
+  };
 
   return (
     <input
@@ -32,4 +40,4 @@ export function CurrencyInput({ amount, handleAmountChange }: CurrencyInputProps
       placeholder="0,00"
     />
   );
-};
+}

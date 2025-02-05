@@ -7,5 +7,4 @@ export function Loading() {
       <div className="spinner"></div>
     </div>
   );
-};
-
+}

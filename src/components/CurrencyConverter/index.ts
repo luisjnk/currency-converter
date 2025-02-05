@@ -1,1 +1,1 @@
-export * from "./CurrencyConverter";
+export * from './CurrencyConverter';

@@ -8,7 +8,10 @@ function App() {
   const [amount, setAmount] = useState(0);
   const [selectedCurrency, setSelectedCurrency] = useState('USD');
 
-  const { rates, isLoading, isError, errorMessage } = useExchangeRates(selectedCurrency, amount);
+  const { rates, isLoading, isError, errorMessage } = useExchangeRates(
+    selectedCurrency,
+    amount
+  );
 
   const handleAmountChange = (value: string) => {
     setAmount(parseFloat(value));
@@ -23,11 +26,21 @@ function App() {
       <div className="container">
         <div className="currency-converter">
           <h1>Currency Converter</h1>
-          <p className='grey-text'>Receive competitive and transparent pricing with no hidden spreads. See how we compare.</p>
-          <CurrencyConverter amount={amount} selectedCurrency={selectedCurrency} handleAmountChange={handleAmountChange} handleCurrencyChange={handleCurrencyChange} />
+          <p className="grey-text">
+            Receive competitive and transparent pricing with no hidden spreads.
+            See how we compare.
+          </p>
+          <CurrencyConverter
+            amount={amount}
+            selectedCurrency={selectedCurrency}
+            handleAmountChange={handleAmountChange}
+            handleCurrencyChange={handleCurrencyChange}
+          />
           {isLoading && <Loading />}
           {isError && errorMessage && <Error message={errorMessage} />}
-          {amount > 0 && !isError && !isLoading && <RatesList rates={rates} amount={amount} />}
+          {amount > 0 && !isError && !isLoading && (
+            <RatesList rates={rates} amount={amount} />
+          )}
         </div>
       </div>
     </div>

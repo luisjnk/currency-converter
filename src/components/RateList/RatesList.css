@@ -3,7 +3,6 @@
   flex-direction: column;
 }
 
-
 .rates-list ul {
   display: flex;
   flex-direction: column;
@@ -11,10 +10,9 @@
   padding: 0;
   gap: 1.5rem;
   padding: 0.75rem 1.2rem 0.75rem 1.5rem;
-
 }
-  
- .currency-container {
+
+.currency-container {
   display: flex;
   flex-direction: column;
   font-family: Arial, sans-serif;
@@ -65,7 +63,7 @@
   }
 }
 
-.rate-item-content-span{
+.rate-item-content-span {
   font-size: 1.25rem;
   line-height: 1.75rem;
   letter-spacing: -0.0125rem;
@@ -84,7 +82,7 @@
   font-weight: 600;
 }
 
-.rate-item-content div{
+.rate-item-content div {
   display: flex;
   -webkit-box-align: center;
   align-items: center;
@@ -94,7 +92,7 @@
   min-width: 7rem;
 }
 
-.rate-item-content div img{
+.rate-item-content div img {
   max-width: 1.5rem;
 }
 
@@ -112,7 +110,9 @@
   font-weight: 600;
   max-width: 150px;
   text-align: center;
-  transition: background-color 0.3s ease, transform 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    transform 0.3s ease;
 }
 
 .show-more-button:hover {
