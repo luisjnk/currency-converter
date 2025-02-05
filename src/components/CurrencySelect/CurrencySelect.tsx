@@ -1,9 +1,6 @@
-import React, { useState } from "react";
-
+import React, { useState, useEffect, useRef } from "react";
 import "./CurrencySelect.css";
 import { CurrencyOption } from "../CurrencyOption/CurrencyOption";
-
-
 
 interface SupportedCurrency {
   name: string;
@@ -18,11 +15,31 @@ interface CurrencySelectProps {
 
 export function CurrencySelect({ supportedCurrencies, selectedCurrency, handleCurrencyChange }: CurrencySelectProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
 
   const selectedCurrencyData = supportedCurrencies.find(currency => currency.name === selectedCurrency);
+  const filteredCurrencies = supportedCurrencies.filter(currency => currency.name !== selectedCurrency);
+
+  const handleClickOutside = (event: MouseEvent) => {
+    if (ref.current && !ref.current.contains(event.target as Node)) {
+      setIsOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  const handleOptionClick = (value: string) => {
+    handleCurrencyChange(value);
+    setIsOpen(false);
+  };
 
   return (
-    <div className="currency-select">
+    <div className="currency-select" ref={ref}>
       <div
         className="selected-currency"
         onClick={() => setIsOpen(!isOpen)}
@@ -38,13 +55,11 @@ export function CurrencySelect({ supportedCurrencies, selectedCurrency, handleCu
       </div>
       {isOpen && (
         <div className="currency-options">
-          {supportedCurrencies.map((currency) => (
-            <CurrencyOption key={currency.name} currency={currency} handleCurrencyChange={handleCurrencyChange} />
+          {filteredCurrencies.map((currency) => (
+            <CurrencyOption key={currency.name} currency={currency} handleCurrencyChange={handleOptionClick} />
           ))}
         </div>
       )}
     </div>
   );
-};
-
-
+}

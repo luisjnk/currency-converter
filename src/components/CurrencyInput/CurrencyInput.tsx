@@ -1,6 +1,7 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useState } from "react";
 import "./CurrencyInput.css";
 import { debounce } from "../../utils/common";
+import { formatToLocaleString, formatToNumber } from "../../utils/helpers";
 
 interface CurrencyInputProps {
   amount: number;
@@ -8,40 +9,28 @@ interface CurrencyInputProps {
 }
 
 export function CurrencyInput({ amount, handleAmountChange }: CurrencyInputProps) {
-  const [formattedAmount, setFormattedAmount] = useState(formatNumber(amount));
 
-  const debouncedHandleAmountChange = useCallback(
-    debounce((value: string) => {
-      handleAmountChange(value);
-    }, 1000),
-    [handleAmountChange]
-  );
+  const [inputValue, setInputValue] = useState('')
 
-  useEffect(() => {
-    setFormattedAmount(formatNumber(amount));
-  }, [amount]);
 
-  function formatNumber(value: number | string) {
-    return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-  }
-
-  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
-    if (e.target.value === "") return;
-    const value = parseFloat(e.target.value.replace(/\./g, ""));
-    setFormattedAmount(formatNumber(value));
-    debouncedHandleAmountChange(value);
+  const debouncedOnInputChange = useCallback(debounce(handleAmountChange, 300), [])
+  const handleInputChange = (entry: string) => {
+    try {
+      setInputValue(formatToLocaleString(entry))
+      debouncedOnInputChange(formatToNumber(entry))
+    } catch (error) {
+      console.warn(error)
+    }
   }
 
   return (
     <input
       data-testid="currency-input"
-      type="text"
-      value={formattedAmount}
-      onChange={handleChange}
+      value={inputValue}
+      onChange={(e) => handleInputChange(e.target.value)}
       className="currency-input"
+      maxLength={12}
       placeholder="0.00"
     />
   );
 };
-
-
