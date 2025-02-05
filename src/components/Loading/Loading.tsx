@@ -3,7 +3,7 @@ import './Loading.css';
 
 export function Loading() {
   return (
-    <div className="loading-container">
+    <div data-testid="loading" className="loading-container">
       <div className="spinner"></div>
     </div>
   );

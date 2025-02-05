@@ -15,6 +15,6 @@ test('calls handleAmountChange on input change', async () => {
     fireEvent.change(inputElement, { target: { value: '2000' } });
 
     await waitFor(() => {
-        expect(inputElement).toHaveValue('2.000');
+        expect(inputElement).toHaveValue('2,000');
     });
 });

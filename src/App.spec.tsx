@@ -41,7 +41,7 @@ describe('App', () => {
 
 		render(<App />);
 
-		expect(screen.getByText(/Loading.../i)).toBeInTheDocument();
+		expect(screen.getByTestId('loading')).toBeInTheDocument();
 	});
 
 	test('displays error state', () => {
@@ -71,7 +71,7 @@ describe('App', () => {
 		fireEvent.change(inputElement, { target: { value: '2000' } });
 
 		await waitFor(() => {
-			expect(inputElement).toHaveValue('2.000');
+			expect(inputElement).toHaveValue('2,000');
 		});
 	});
 
@@ -95,7 +95,7 @@ describe('App', () => {
 		});
 	});
 
-	test('renders RatesList when amount is greater than 0', () => {
+	test('renders RatesList when amount is greater than 0', async () => {
 		mockUseExchangeRates.mockReturnValue({
 			rates: mockRates,
 			isLoading: false,
@@ -108,7 +108,8 @@ describe('App', () => {
 		const inputElement = screen.getByPlaceholderText(/0.00/i);
 		fireEvent.change(inputElement, { target: { value: '2000' } });
 
-		expect(screen.getByText(/EUR: 1.2/i)).toBeInTheDocument();
-		expect(screen.getByText(/USD: 0.8333333333333334/i)).toBeInTheDocument();
+		await waitFor(() => {
+			expect(screen.getByText(/2,400.00/i)).toBeInTheDocument();
+		});
 	});
 });

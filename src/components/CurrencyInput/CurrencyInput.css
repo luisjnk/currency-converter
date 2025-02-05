@@ -18,10 +18,6 @@
   font-weight: normal;
 }
 
-.currency-input {
-  -moz-appearance: textfield;
-}
-
 .currency-input::-webkit-outer-spin-button,
 .currency-input::-webkit-inner-spin-button {
   -webkit-appearance: none;
