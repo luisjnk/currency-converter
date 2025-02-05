@@ -18,6 +18,7 @@ interface UseExchangeRatesResult {
   rates: ExchangeRate[] | null;
   isError: boolean;
   isLoading: boolean;
+  errorMessage: string | null;
 }
 
 const sdk = new SDK({
@@ -89,10 +90,11 @@ function isCacheExpired(timestamp: number): boolean {
   return currentTime - timestamp >= oneHour;
 }
 
-export function useExchangeRates(baseCurrency: string, amount: number): UseExchangeRatesResult {  
+export function useExchangeRates(baseCurrency: string, amount: number): UseExchangeRatesResult {
   const [rates, setRates] = useState<ExchangeRate[]>([]);
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   useEffect(() => {
     const cachedData = getCachedRates(baseCurrency);
@@ -112,7 +114,9 @@ export function useExchangeRates(baseCurrency: string, amount: number): UseExcha
         setCachedRates(baseCurrency, rates);
         setIsLoading(false);
       } catch (err) {
+        console.log(err);
         setIsError(true);
+        setErrorMessage('An error occurred while fetching exchange rates.');
         setIsLoading(false);
       }
     };
@@ -122,5 +126,5 @@ export function useExchangeRates(baseCurrency: string, amount: number): UseExcha
     }
   }, [baseCurrency, amount]);
 
-  return { rates, isError, isLoading };
+  return { rates, isError, isLoading, errorMessage };
 }

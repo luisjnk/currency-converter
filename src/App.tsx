@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import './App.css';
 import { CurrencyConverter } from './components/CurrencyConverter';
 import { useExchangeRates } from './hooks';
-import { Loading, RatesList } from './components';
+import { Loading, RatesList, Error } from './components';
 
 function App() {
   const [amount, setAmount] = useState(0);
   const [selectedCurrency, setSelectedCurrency] = useState('USD');
 
-  const { rates, isLoading, isError } = useExchangeRates(selectedCurrency, amount);
+  const { rates, isLoading, isError, errorMessage } = useExchangeRates(selectedCurrency, amount);
 
   const handleAmountChange = (value: string) => {
     setAmount(parseFloat(value));
@@ -23,10 +23,11 @@ function App() {
       <div className="container">
         <div className="currency-converter-section">
           <h1>Currency Converter</h1>
-          <p>Receive competitive and transparent pricing with no hidden spreads. See how we compare.</p>
+          <p className='grey-text'>Receive competitive and transparent pricing with no hidden spreads. See how we compare.</p>
           <CurrencyConverter amount={amount} selectedCurrency={selectedCurrency} handleAmountChange={handleAmountChange} handleCurrencyChange={handleCurrencyChange} />
-          <RatesList rates={rates} amount={amount} />
           {isLoading && <Loading />}
+          {isError && errorMessage && <Error message={errorMessage} />}
+          {amount > 0 && <RatesList rates={rates} amount={amount} />}
         </div>
       </div>
     </div>

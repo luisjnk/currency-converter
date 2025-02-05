@@ -18,3 +18,12 @@ div {
   display: block;
   unicode-bidi: isolate;
 }
+
+.grey-text {
+  color: rgb(148, 162, 176);
+}
+
+.light-pink-text {
+  color: #f18e97;
+}
+
