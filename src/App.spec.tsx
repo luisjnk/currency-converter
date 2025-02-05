@@ -2,8 +2,10 @@ import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import App from './App';
 import { useExchangeRates } from './hooks';
+import SDK from '@uphold/uphold-sdk-javascript';
 
 jest.mock('./hooks');
+jest.mock('@uphold/uphold-sdk-javascript');
 
 const mockUseExchangeRates = useExchangeRates as jest.MockedFunction<typeof useExchangeRates>;
 
@@ -12,9 +14,21 @@ const mockRates = [
 	{ currency: 'USD', rate: '0.8333333333333334' },
 ];
 
+const mockCurrencyRates = [
+	{ ask: '1.2', bid: '1.1', currency: 'USD', pair: 'USD-EUR' },
+	{ ask: '0.9', bid: '0.8', currency: 'EUR', pair: 'EUR-USD' },
+];
+
+const mockSDK = {
+	getTicker: jest.fn(),
+};
+
+SDK.mockImplementation(() => mockSDK);
+
 describe('App', () => {
 	beforeEach(() => {
-		mockUseExchangeRates.mockClear();
+		localStorage.clear();
+		mockSDK.getTicker.mockReset();
 	});
 
 	test('renders App component', () => {
@@ -112,4 +126,17 @@ describe('App', () => {
 			expect(screen.getByText(/2,400.00/i)).toBeInTheDocument();
 		});
 	});
+
+	test('fetches and displays exchange rates', async () => {
+		mockSDK.getTicker.mockResolvedValue(mockCurrencyRates);
+
+		render(<App />);
+		const inputElement = screen.getByPlaceholderText(/0.00/i);
+		fireEvent.change(inputElement, { target: { value: '2000' } });
+
+		await waitFor(() => {
+			expect(screen.getByText(/2,400.00/i)).toBeInTheDocument();
+		});
+	});
+
 });
