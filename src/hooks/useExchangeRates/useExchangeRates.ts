@@ -32,8 +32,8 @@ function getCurrencyCode(pair: string, base: string): string {
 
 function filterSupportedPairs(currencyRates: CurrencyRate[], baseCurrency: string): CurrencyRate[] {
   return currencyRates.filter(({ pair }) =>
-    supportedCurrencies
-      .some(currency => currency.name === getCurrencyCode(pair, baseCurrency) ))
+    supportedCurrencies.some(currency => currency.name === getCurrencyCode(pair, baseCurrency))
+  );
 }
 
 function removeDuplicatePairs(supportedPairs: CurrencyRate[], baseCurrency: string): CurrencyRate[] {
@@ -64,6 +64,30 @@ function getRatesByBaseCurrency(currencyRates: CurrencyRate[], baseCurrency: str
   return convertPairsToRates(uniquePairs, baseCurrency);
 }
 
+function getCacheKey(baseCurrency: string): string {
+  return `exchangeRates_${baseCurrency}`;
+}
+
+function getCachedRates(baseCurrency: string): { rates: ExchangeRate[], timestamp: number } | null {
+  const cacheKey = getCacheKey(baseCurrency);
+  const cachedData = localStorage.getItem(cacheKey);
+  if (cachedData) {
+    return JSON.parse(cachedData);
+  }
+  return null;
+}
+
+function setCachedRates(baseCurrency: string, rates: ExchangeRate[]): void {
+  const cacheKey = getCacheKey(baseCurrency);
+  const timestamp = new Date().getTime();
+  localStorage.setItem(cacheKey, JSON.stringify({ rates, timestamp }));
+}
+
+function isCacheExpired(timestamp: number): boolean {
+  const currentTime = new Date().getTime();
+  const oneHour = 60 * 60 * 1000;
+  return currentTime - timestamp >= oneHour;
+}
 
 export function useExchangeRates(baseCurrency: string, amount: number): UseExchangeRatesResult {  
   const [rates, setRates] = useState<ExchangeRate[]>([]);
@@ -71,10 +95,12 @@ export function useExchangeRates(baseCurrency: string, amount: number): UseExcha
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    const cachedRates = localStorage.getItem(`exchangeRates_${baseCurrency}`);
-    if (cachedRates) {
-      setRates(JSON.parse(cachedRates));
+    const cachedData = getCachedRates(baseCurrency);
+    if (cachedData && !isCacheExpired(cachedData.timestamp)) {
+      setRates(cachedData.rates);
       return;
+    } else if (cachedData) {
+      localStorage.removeItem(getCacheKey(baseCurrency));
     }
 
     const updateRates = async () => {
@@ -83,7 +109,7 @@ export function useExchangeRates(baseCurrency: string, amount: number): UseExcha
         const currencyRates = await sdk.getTicker(baseCurrency);
         const rates = getRatesByBaseCurrency(currencyRates, baseCurrency);
         setRates(rates);
-        localStorage.setItem(`exchangeRates_${baseCurrency}`, JSON.stringify(rates));
+        setCachedRates(baseCurrency, rates);
         setIsLoading(false);
       } catch (err) {
         setIsError(true);
@@ -91,8 +117,10 @@ export function useExchangeRates(baseCurrency: string, amount: number): UseExcha
       }
     };
 
-    updateRates();
-  }, [baseCurrency, setRates, amount, setIsError, setIsLoading]);
+    if (amount > 0) {
+      updateRates();
+    }
+  }, [baseCurrency, amount]);
 
-  return {rates, isError, isLoading};
+  return { rates, isError, isLoading };
 }
