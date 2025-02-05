@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './RatesList.css';
 import { supportedCurrencies } from '../../utils/supportedCurrencies';
 
@@ -13,23 +13,37 @@ interface RatesListProps {
 }
 
 export function RatesList({ rates, amount }: RatesListProps) {
+  const [visibleCount, setVisibleCount] = useState(10);
+
   const getCurrencyImagePath = (currency: string) => {
     const currencyData = supportedCurrencies.find(({ name }) => name === currency);
     return currencyData ? currencyData.path : '';
   }
+  const handleShowMore = () => {
+    setVisibleCount(visibleCount + 20);
+  };
+
   return (
-    <ul className="rates-list">
-      {rates.map((rate) => (
-        <li className='rate-item-content' key={rate.currency}>
-          <span className="rate-item-currency">
-            {(amount * parseFloat(rate.rate)).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-          </span>
-          <div>
-            <img src={getCurrencyImagePath(rate.currency)} alt={rate.currency} />
-            <span className="rate-item-currency">{rate.currency}</span>
-          </div>
-        </li>
-      ))}
-    </ul>
+    <div className="rates-list">
+      <ul>
+        {rates.slice(0, visibleCount).map((rate) => (
+          <li className='rate-item-content' key={rate.currency}>
+            <span className="rate-item-currency">
+              {(amount * parseFloat(rate.rate)).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+            </span>
+            <div>
+              <img src={getCurrencyImagePath(rate.currency)} alt={rate.currency} />
+              <span className="rate-item-currency">{rate.currency}</span>
+            </div>
+          </li>
+        ))}
+      </ul>
+      {visibleCount < rates.length && (
+        <button onClick={handleShowMore} className="show-more-button">
+          Show More
+        </button>
+      )}
+    </div>
+
   );
 };

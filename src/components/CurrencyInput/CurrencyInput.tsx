@@ -1,7 +1,6 @@
 import React, { useCallback, useState } from "react";
 import "./CurrencyInput.css";
-import { debounce } from "../../utils/common";
-import { formatToLocaleString, formatToNumber } from "../../utils/helpers";
+import { debounce, formatToLocaleString, formatToNumber } from "../../utils/helpers";
 
 interface CurrencyInputProps {
   amount: number;

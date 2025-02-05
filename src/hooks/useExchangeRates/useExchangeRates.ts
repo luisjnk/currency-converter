@@ -97,6 +97,7 @@ export function useExchangeRates(baseCurrency: string, amount: number): UseExcha
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   useEffect(() => {
+    setIsError(false);
     const cachedData = getCachedRates(baseCurrency);
     if (cachedData && !isCacheExpired(cachedData.timestamp)) {
       setRates(cachedData.rates);

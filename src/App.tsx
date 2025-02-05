@@ -21,13 +21,13 @@ function App() {
   return (
     <div className="home">
       <div className="container">
-        <div className="currency-converter-section">
+        <div className="currency-converter">
           <h1>Currency Converter</h1>
           <p className='grey-text'>Receive competitive and transparent pricing with no hidden spreads. See how we compare.</p>
           <CurrencyConverter amount={amount} selectedCurrency={selectedCurrency} handleAmountChange={handleAmountChange} handleCurrencyChange={handleCurrencyChange} />
           {isLoading && <Loading />}
           {isError && errorMessage && <Error message={errorMessage} />}
-          {amount > 0 && <RatesList rates={rates} amount={amount} />}
+          {amount > 0 && !isError && !isLoading && <RatesList rates={rates} amount={amount} />}
         </div>
       </div>
     </div>
